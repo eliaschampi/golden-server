@@ -1,0 +1,11 @@
+APP_NAME=goldenApi
+VERSION=1.0.0
+STAGE=dev
+
+DATABASE_URL="postgres://user:password@127.0.0.1:5432/golden?sslmode=disable"
+
+PORT=3000
+
+DBMATE_MIGRATIONS_DIR="./database/migrations"
+DBMATE_SCHEMA_FILE="./database/base/schema.sql"
+DBMATE_MIGRATIONS_TABLE="migrations"

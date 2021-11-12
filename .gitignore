@@ -1,0 +1,6 @@
+.idea
+.vscode
+.env
+go.sum
+rest.*
+notitas
