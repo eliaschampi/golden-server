@@ -1,17 +1,18 @@
 package deliveryhttp
 
 import (
-	domain "golden-server/domain/entity"
+	"golden-server/domain/entity"
 	"golden-server/interface/presenter"
+	"log"
 
 	"github.com/gofiber/fiber/v2"
 )
 
 type rolHandler struct {
-	service domain.RolService
+	service entity.RolService
 }
 
-func NewRolHandler(service domain.RolService, router fiber.Router) {
+func NewRolHandler(service entity.RolService, router fiber.Router) {
 	handler := &rolHandler{service: service}
 
 	rol := router.Group("/roles")
@@ -24,8 +25,10 @@ func (rh *rolHandler) getAll(c *fiber.Ctx) error {
 	roles, err := rh.service.GetAll(c.Context())
 
 	if err != nil {
+
+		log.Println("Error", err.Error()) //save logs to file
+
 		return presenter.JsonResponse(c, fiber.StatusInternalServerError, nil)
-		// log error to file
 	}
 
 	data := make([]interface{}, len(roles))
