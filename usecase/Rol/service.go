@@ -6,14 +6,14 @@ import (
 )
 
 type service struct {
-	rolRepository domainentity.RolRepository
+	rolRepository entity.RolRepository
 }
 
-func NewService(repo *domainentity.RolRepository) domainentity.RolService {
+func NewService(repo *entity.RolRepository) entity.RolService {
 	return &service{*repo}
 }
 
-func (s *service) GetAll(c context.Context) ([]*domainentity.Rol, error) {
+func (s *service) GetAll(c context.Context) ([]*entity.Rol, error) {
 	roles, err := s.rolRepository.GetAll(c)
 
 	if err != nil {
@@ -22,5 +22,3 @@ func (s *service) GetAll(c context.Context) ([]*domainentity.Rol, error) {
 
 	return roles, nil
 }
-
-

@@ -1,16 +1,17 @@
 package main
 
 import (
-	"github.com/go-rel/rel"
-	"github.com/gofiber/fiber/v2"
 	"golden-server/app/core"
 	"golden-server/configuration"
 	"log"
 
+	"github.com/go-rel/rel"
+	"github.com/gofiber/fiber/v2"
+
 	_ "github.com/lib/pq"
 )
 
-func main()  {
+func main() {
 
 	var err error
 	var adapter rel.Adapter
@@ -26,15 +27,11 @@ func main()  {
 		panic(err)
 	}
 
-	relRepository := rel.New(adapter)
+	kathRelInstance := rel.New(adapter)
 
 	app := fiber.New()
 
-	core.StartApp(relRepository, app)
-
-	app.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString("te amo kath")
-	})
+	core.StartApp(&kathRelInstance, app)
 
 	log.Fatalln(app.Listen(":3000"))
 }

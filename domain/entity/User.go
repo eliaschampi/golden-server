@@ -1,4 +1,4 @@
-package domainentity
+package entity
 
 import "time"
 
