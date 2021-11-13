@@ -22,9 +22,14 @@ func StartApp(kathRelInstance *rel.Repository, app *fiber.App) {
 	})
 
 	router := setupApiV1(app)
+
 	//send to delivery here
 	presenter.NewMessages()
 	deliveryhttp.NewRolHandler(rolService, router)
+
+	app.Use(func(c *fiber.Ctx) error {
+		return c.Status(fiber.StatusNotFound).SendString("Sorry can't find that!")
+	})
 }
 
 func setupApiV1(app *fiber.App) fiber.Router {

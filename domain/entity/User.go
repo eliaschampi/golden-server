@@ -1,6 +1,9 @@
 package entity
 
-import "time"
+import (
+	"context"
+	"time"
+)
 
 type User struct {
 	Dni       string
@@ -15,4 +18,12 @@ type User struct {
 	Email     string
 	Password  string
 	CreatedAt time.Time
+}
+
+type UserRepository interface {
+	GetAll(context context.Context) ([]*User, error)
+}
+
+type UserService interface {
+	GetAll(context context.Context) ([]*User, error)
 }

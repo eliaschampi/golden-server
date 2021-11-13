@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"golden-server/app/core"
 	"golden-server/configuration"
 	"log"
@@ -40,5 +41,5 @@ func main() {
 		port = "3000"
 	}
 
-	log.Fatalln(app.Listen(":" + port))
+	log.Fatalln(app.Listen(fmt.Sprintf(":%s", port)))
 }
