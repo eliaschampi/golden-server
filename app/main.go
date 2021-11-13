@@ -4,6 +4,7 @@ import (
 	"golden-server/app/core"
 	"golden-server/configuration"
 	"log"
+	"os"
 
 	"github.com/go-rel/rel"
 	"github.com/gofiber/fiber/v2"
@@ -33,5 +34,11 @@ func main() {
 
 	core.StartApp(&kathRelInstance, app)
 
-	log.Fatalln(app.Listen(":3000"))
+	port := os.Getenv("PORT")
+
+	if port == "" {
+		port = "3000"
+	}
+
+	log.Fatalln(app.Listen(":" + port))
 }

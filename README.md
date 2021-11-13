@@ -44,7 +44,7 @@ to create database in postgres _check "infraestructure/database/base" folder_
 dbmate up
 ```
 
-Install the dependencies and devDependencies and start the server.
+Install the dependencies and start the server.
 
 ```sh
 make download
@@ -58,5 +58,5 @@ then, check
 ```
 
 ## License
-MIT
+APACHE LICENSE 2.0
 
