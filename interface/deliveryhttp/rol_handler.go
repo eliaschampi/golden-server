@@ -13,7 +13,7 @@ type rolHandler struct {
 }
 
 func NewRolHandler(service entity.RolService, router fiber.Router) {
-	handler := &rolHandler{service: service}
+	handler := &rolHandler{service}
 
 	rol := router.Group("/roles")
 	rol.Get("/", handler.getAll)

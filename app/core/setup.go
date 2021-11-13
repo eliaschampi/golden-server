@@ -4,7 +4,7 @@ import (
 	"golden-server/infrastructure/repository"
 	"golden-server/interface/deliveryhttp"
 	"golden-server/interface/presenter"
-	"golden-server/usecase/Rol"
+	"golden-server/usecase"
 
 	"github.com/go-rel/rel"
 	"github.com/gofiber/fiber/v2"
@@ -14,8 +14,10 @@ import (
 func StartApp(kathRelInstance *rel.Repository, app *fiber.App) {
 
 	rolRepo := repository.NewRolRepository(kathRelInstance)
+	userRepo := repository.NewUserRepository(kathRelInstance)
 
-	rolService := Rol.NewService(&rolRepo)
+	rolService := usecase.NewRolService(&rolRepo)
+	userService := usecase.NewUserService(&userRepo)
 
 	app.Get("/", func(c *fiber.Ctx) error {
 		return c.SendString("te amo kath")
@@ -25,10 +27,12 @@ func StartApp(kathRelInstance *rel.Repository, app *fiber.App) {
 
 	//send to delivery here
 	presenter.NewMessages()
+
 	deliveryhttp.NewRolHandler(rolService, router)
+	deliveryhttp.NewUserHandler(userService, router)
 
 	app.Use(func(c *fiber.Ctx) error {
-		return c.Status(fiber.StatusNotFound).SendString("Sorry can't find that!")
+		return c.Status(fiber.StatusNotFound).SendString("Elias, i can't find that!")
 	})
 }
 
