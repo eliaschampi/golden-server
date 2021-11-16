@@ -8,10 +8,10 @@ type rolPresenter struct {
 	Description string `json:"description"`
 }
 
-func MapRol(rol entity.Rol) interface{} {
+func MapRol(rol entity.Role) interface{} {
 	return rolPresenter{
 		Code:        CodeToString(rol.Code),
 		Name:        rol.Name,
-		Description: rol.Description,
+		Description: rol.Description.String,
 	}
 }

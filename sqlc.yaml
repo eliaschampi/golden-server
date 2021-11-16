@@ -1,0 +1,16 @@
+version: 1
+
+packages:
+  - name: "entity"
+    engine: "postgresql"
+    path: "./domain/entity/"
+    queries: "./infrastructure/database/queries/"
+    schema: "./infrastructure/database/migrations/"
+    json_tags_case_style: "snake"
+    emit_json_tags: false
+    emit_empty_slices: true
+
+overrides:
+  - db_type: "pg_catalog.numeric"
+    go_type: "float32"
+    nullable: false

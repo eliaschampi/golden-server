@@ -1,7 +1,7 @@
 package deliveryhttp
 
 import (
-	"golden-server/domain/entity"
+	"golden-server/domain/interfaces"
 	"golden-server/interface/presenter"
 	"log"
 
@@ -9,10 +9,10 @@ import (
 )
 
 type userHandler struct {
-	service entity.UserService
+	service interfaces.UserService
 }
 
-func NewUserHandler(service entity.UserService, router fiber.Router) {
+func NewUserHandler(service interfaces.UserService, router fiber.Router) {
 	handler := &userHandler{service}
 
 	user := router.Group("/user")

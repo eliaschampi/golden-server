@@ -3,22 +3,17 @@ package repository
 import (
 	"context"
 	"golden-server/domain/entity"
-
-	"github.com/go-rel/rel"
+	"golden-server/domain/interfaces"
 )
 
 type rolRepository struct {
-	kath rel.Repository
+	kath *entity.Queries
 }
 
-func NewRolRepository(kath *rel.Repository) entity.RolRepository {
-	return &rolRepository{kath: *kath}
+func NewRolRepository(kath *entity.Queries) interfaces.RolRepository {
+	return &rolRepository{kath}
 }
 
-func (r *rolRepository) GetAll(c context.Context) ([]*entity.Rol, error) {
-	var roles []*entity.Rol
-	if err := r.kath.FindAll(c, &roles); err != nil {
-		return nil, err
-	}
-	return roles, nil
+func (r *rolRepository) GetAll(c context.Context) ([]entity.Role, error) {
+	return r.kath.GetRoles(c)
 }

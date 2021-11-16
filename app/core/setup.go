@@ -1,20 +1,23 @@
 package core
 
 import (
+	"database/sql"
+	"golden-server/domain/entity"
 	"golden-server/infrastructure/repository"
 	"golden-server/interface/deliveryhttp"
 	"golden-server/interface/presenter"
 	"golden-server/usecase"
 
-	"github.com/go-rel/rel"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/logger"
 )
 
-func StartApp(kathRelInstance *rel.Repository, app *fiber.App) {
+func StartApp(sqlInstance *sql.DB, app *fiber.App) {
 
-	rolRepo := repository.NewRolRepository(kathRelInstance)
-	userRepo := repository.NewUserRepository(kathRelInstance)
+	queries := entity.New(sqlInstance)
+
+	rolRepo := repository.NewRolRepository(queries)
+	userRepo := repository.NewUserRepository(queries)
 
 	rolService := usecase.NewRolService(&rolRepo)
 	userService := usecase.NewUserService(&userRepo)

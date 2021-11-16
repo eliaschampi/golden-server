@@ -1,7 +1,7 @@
 package deliveryhttp
 
 import (
-	"golden-server/domain/entity"
+	"golden-server/domain/interfaces"
 	"golden-server/interface/presenter"
 	"log"
 
@@ -9,10 +9,10 @@ import (
 )
 
 type rolHandler struct {
-	service entity.RolService
+	service interfaces.RolService
 }
 
-func NewRolHandler(service entity.RolService, router fiber.Router) {
+func NewRolHandler(service interfaces.RolService, router fiber.Router) {
 	handler := &rolHandler{service}
 
 	rol := router.Group("/roles")
@@ -34,7 +34,7 @@ func (rh *rolHandler) getAll(c *fiber.Ctx) error {
 	data := make([]interface{}, len(roles))
 
 	for i, rol := range roles {
-		data[i] = presenter.MapRol(*rol)
+		data[i] = presenter.MapRol(rol)
 	}
 
 	return presenter.JsonResponse(c, fiber.StatusOK, data)

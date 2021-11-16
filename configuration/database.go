@@ -1,22 +1,20 @@
 package configuration
 
 import (
-	"github.com/go-rel/postgres"
-	"github.com/go-rel/rel"
+	"database/sql"
 	"os"
 )
 
-func ConnectToDB() (adapter rel.Adapter, err error) {
+func ConnectToDB() (sqlInstance *sql.DB, err error) {
 
 	url := os.Getenv("DATABASE_URL")
 
-	adapter, err = postgres.Open(url)
+	sqlInstance, err = sql.Open("postgres", url)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return adapter, nil
+	return sqlInstance, nil
 
 }
-

@@ -1,5 +1,5 @@
 # GOLANG FIBER API (CLEAN ARCHITECTURE)
-**_Best simple, lightweight, powerful and really fast Api with Golang (Fiber, REL, Dbmate) PostgreSqLDatabase using Clean Architecture_**
+**_Best simple, lightweight, powerful and really fast Api with Golang (Fiber, Sqlc, Dbmate) PostgreSqLDatabase using Clean Architecture_**
 
 status: **WIP**
 
@@ -24,7 +24,7 @@ LAYERS
 API of an order flow inventory system built for the "**Versatil** Print shop".
 
 ## about frameworks
-It is created with golang (fiber and REL)
+It is created with golang (fiber,Sqlc)
 
 ## how to run
 

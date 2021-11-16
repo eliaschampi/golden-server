@@ -31,15 +31,14 @@ SET default_table_access_method = heap;
 -- Name: cashes; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE public.cashes
-(
-    code        uuid                           DEFAULT public.uuid_generate_v4() NOT NULL,
-    user_dni    character(8)                                                     NOT NULL,
-    amount      numeric(12, 2)                 DEFAULT 0.00                      NOT NULL,
-    state       boolean                        DEFAULT true                      NOT NULL,
+CREATE TABLE public.cashes (
+    code uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    user_dni character(8) NOT NULL,
+    amount numeric(12,2) DEFAULT 0.00 NOT NULL,
+    state boolean DEFAULT true NOT NULL,
     description character varying(300),
-    created_at  timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP(6),
-    updated_at  timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP(6)
+    created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP(6) NOT NULL,
+    updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP(6) NOT NULL
 );
 
 
@@ -47,10 +46,9 @@ CREATE TABLE public.cashes
 -- Name: categories; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE public.categories
-(
-    code        uuid DEFAULT public.uuid_generate_v4() NOT NULL,
-    name        character varying(120)                 NOT NULL,
+CREATE TABLE public.categories (
+    code uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    name character varying(120) NOT NULL,
     description character varying(300)
 );
 
@@ -59,17 +57,16 @@ CREATE TABLE public.categories
 -- Name: contacts; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE public.contacts
-(
-    code        uuid                           DEFAULT public.uuid_generate_v4() NOT NULL,
-    name        character varying(255)                                           NOT NULL,
-    type        character(1)                                                     NOT NULL,
-    email       character varying(50),
-    phone       character varying(30),
-    address     character varying(120),
+CREATE TABLE public.contacts (
+    code uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    name character varying(255) NOT NULL,
+    type character(1) NOT NULL,
+    email character varying(50),
+    phone character varying(30),
+    address character varying(120),
     description character varying(300),
-    created_at  timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP(6),
-    updated_at  timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP(6)
+    created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP(6) NOT NULL,
+    updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP(6) NOT NULL
 );
 
 
@@ -77,15 +74,14 @@ CREATE TABLE public.contacts
 -- Name: expenses; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE public.expenses
-(
-    code        uuid                           DEFAULT public.uuid_generate_v4() NOT NULL,
-    description character varying(350)                                           NOT NULL,
-    user_dni    character(8)                                                     NOT NULL,
-    cash_code   uuid                                                             NOT NULL,
-    total       numeric(12, 2)                 DEFAULT 0.00                      NOT NULL,
-    created_at  timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP(6),
-    updated_at  timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP(6)
+CREATE TABLE public.expenses (
+    code uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    description character varying(350) NOT NULL,
+    user_dni character(8) NOT NULL,
+    cash_code uuid NOT NULL,
+    total numeric(12,2) DEFAULT 0.00 NOT NULL,
+    created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP(6) NOT NULL,
+    updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP(6) NOT NULL
 );
 
 
@@ -93,13 +89,12 @@ CREATE TABLE public.expenses
 -- Name: materials; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE public.materials
-(
-    code          uuid                           DEFAULT public.uuid_generate_v4() NOT NULL,
-    name          character varying(150)                                           NOT NULL,
-    description   character varying(300),
-    category_code uuid                                                             NOT NULL,
-    created_at    timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP(6)
+CREATE TABLE public.materials (
+    code uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    name character varying(150) NOT NULL,
+    description character varying(300),
+    category_code uuid NOT NULL,
+    created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP(6)
 );
 
 
@@ -107,8 +102,7 @@ CREATE TABLE public.materials
 -- Name: migrations; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE public.migrations
-(
+CREATE TABLE public.migrations (
     version character varying(255) NOT NULL
 );
 
@@ -117,12 +111,11 @@ CREATE TABLE public.migrations
 -- Name: purchase_details; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE public.purchase_details
-(
-    purchase_code uuid                        NOT NULL,
-    material_code uuid                        NOT NULL,
-    quantity      integer        DEFAULT 0    NOT NULL,
-    price         numeric(12, 2) DEFAULT 0.00 NOT NULL
+CREATE TABLE public.purchase_details (
+    purchase_code uuid NOT NULL,
+    material_code uuid NOT NULL,
+    quantity integer DEFAULT 0 NOT NULL,
+    price numeric(12,2) DEFAULT 0.00 NOT NULL
 );
 
 
@@ -130,11 +123,10 @@ CREATE TABLE public.purchase_details
 -- Name: purchases; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE public.purchases
-(
+CREATE TABLE public.purchases (
     expense_code uuid NOT NULL,
     contact_code uuid NOT NULL,
-    voucher_num  character varying(20)
+    voucher_num character varying(20)
 );
 
 
@@ -142,10 +134,9 @@ CREATE TABLE public.purchases
 -- Name: roles; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE public.roles
-(
-    code        uuid DEFAULT public.uuid_generate_v4() NOT NULL,
-    name        character varying(20)                  NOT NULL,
+CREATE TABLE public.roles (
+    code uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    name character varying(20) NOT NULL,
     description character varying(255)
 );
 
@@ -154,12 +145,11 @@ CREATE TABLE public.roles
 -- Name: stocks; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE public.stocks
-(
-    material_code uuid                                     NOT NULL,
-    quantity      integer                        DEFAULT 0 NOT NULL,
-    state         character(1),
-    updated_at    timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP(6)
+CREATE TABLE public.stocks (
+    material_code uuid NOT NULL,
+    quantity integer DEFAULT 0 NOT NULL,
+    state character(1),
+    updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP(6) NOT NULL
 );
 
 
@@ -167,19 +157,18 @@ CREATE TABLE public.stocks
 -- Name: users; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE public.users
-(
-    dni        character(8)          NOT NULL,
-    name       character varying(20) NOT NULL,
-    lastname   character varying(50) NOT NULL,
-    rol_code   uuid                  NOT NULL,
-    gender     character(1),
-    image      character varying(100),
-    address    character varying(100),
-    phone      character varying(40),
-    email      character varying(50),
-    password   character varying(100),
-    created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP(6)
+CREATE TABLE public.users (
+    dni character(8) NOT NULL,
+    name character varying(20) NOT NULL,
+    lastname character varying(50) NOT NULL,
+    rol_code uuid NOT NULL,
+    gender character(1),
+    image character varying(100),
+    address character varying(100),
+    phone character varying(40),
+    email character varying(50),
+    password character varying(100),
+    created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP(6) NOT NULL
 );
 
 
@@ -276,7 +265,7 @@ ALTER TABLE ONLY public.users
 --
 
 ALTER TABLE ONLY public.cashes
-    ADD CONSTRAINT cashes_user_dni_fkey FOREIGN KEY (user_dni) REFERENCES public.users (dni);
+    ADD CONSTRAINT cashes_user_dni_fkey FOREIGN KEY (user_dni) REFERENCES public.users(dni);
 
 
 --
@@ -284,7 +273,7 @@ ALTER TABLE ONLY public.cashes
 --
 
 ALTER TABLE ONLY public.expenses
-    ADD CONSTRAINT expenses_cash_code_fkey FOREIGN KEY (cash_code) REFERENCES public.cashes (code);
+    ADD CONSTRAINT expenses_cash_code_fkey FOREIGN KEY (cash_code) REFERENCES public.cashes(code);
 
 
 --
@@ -292,7 +281,7 @@ ALTER TABLE ONLY public.expenses
 --
 
 ALTER TABLE ONLY public.expenses
-    ADD CONSTRAINT expenses_user_dni_fkey FOREIGN KEY (user_dni) REFERENCES public.users (dni);
+    ADD CONSTRAINT expenses_user_dni_fkey FOREIGN KEY (user_dni) REFERENCES public.users(dni);
 
 
 --
@@ -300,7 +289,7 @@ ALTER TABLE ONLY public.expenses
 --
 
 ALTER TABLE ONLY public.materials
-    ADD CONSTRAINT materials_category_code_fkey FOREIGN KEY (category_code) REFERENCES public.categories (code);
+    ADD CONSTRAINT materials_category_code_fkey FOREIGN KEY (category_code) REFERENCES public.categories(code);
 
 
 --
@@ -308,7 +297,7 @@ ALTER TABLE ONLY public.materials
 --
 
 ALTER TABLE ONLY public.purchase_details
-    ADD CONSTRAINT purchase_details_material_code_fkey FOREIGN KEY (material_code) REFERENCES public.materials (code);
+    ADD CONSTRAINT purchase_details_material_code_fkey FOREIGN KEY (material_code) REFERENCES public.materials(code);
 
 
 --
@@ -316,7 +305,7 @@ ALTER TABLE ONLY public.purchase_details
 --
 
 ALTER TABLE ONLY public.purchase_details
-    ADD CONSTRAINT purchase_details_purchase_code_fkey FOREIGN KEY (purchase_code) REFERENCES public.purchases (expense_code);
+    ADD CONSTRAINT purchase_details_purchase_code_fkey FOREIGN KEY (purchase_code) REFERENCES public.purchases(expense_code);
 
 
 --
@@ -324,7 +313,7 @@ ALTER TABLE ONLY public.purchase_details
 --
 
 ALTER TABLE ONLY public.purchases
-    ADD CONSTRAINT purchases_contact_code_fkey FOREIGN KEY (contact_code) REFERENCES public.contacts (code);
+    ADD CONSTRAINT purchases_contact_code_fkey FOREIGN KEY (contact_code) REFERENCES public.contacts(code);
 
 
 --
@@ -332,7 +321,7 @@ ALTER TABLE ONLY public.purchases
 --
 
 ALTER TABLE ONLY public.purchases
-    ADD CONSTRAINT purchases_expense_code_fkey FOREIGN KEY (expense_code) REFERENCES public.expenses (code);
+    ADD CONSTRAINT purchases_expense_code_fkey FOREIGN KEY (expense_code) REFERENCES public.expenses(code);
 
 
 --
@@ -340,7 +329,7 @@ ALTER TABLE ONLY public.purchases
 --
 
 ALTER TABLE ONLY public.stocks
-    ADD CONSTRAINT stocks_material_code_fkey FOREIGN KEY (material_code) REFERENCES public.materials (code);
+    ADD CONSTRAINT stocks_material_code_fkey FOREIGN KEY (material_code) REFERENCES public.materials(code);
 
 
 --
@@ -348,7 +337,7 @@ ALTER TABLE ONLY public.stocks
 --
 
 ALTER TABLE ONLY public.users
-    ADD CONSTRAINT users_rol_code_fkey FOREIGN KEY (rol_code) REFERENCES public.roles (code);
+    ADD CONSTRAINT users_rol_code_fkey FOREIGN KEY (rol_code) REFERENCES public.roles(code);
 
 
 --
@@ -360,14 +349,14 @@ ALTER TABLE ONLY public.users
 -- Dbmate schema migrations
 --
 
-INSERT INTO public.migrations (version)
-VALUES ('20211031000216'),
-       ('20211031000223'),
-       ('20211103172711'),
-       ('20211103182357'),
-       ('20211103183704'),
-       ('20211103235446'),
-       ('20211104000825'),
-       ('20211104002126'),
-       ('20211104002223'),
-       ('20211104210153');
+INSERT INTO public.migrations (version) VALUES
+    ('20211031000216'),
+    ('20211031000223'),
+    ('20211103172711'),
+    ('20211103182357'),
+    ('20211103183704'),
+    ('20211103235446'),
+    ('20211104000825'),
+    ('20211104002126'),
+    ('20211104002223'),
+    ('20211104210153');
