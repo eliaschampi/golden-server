@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"golden-server/domain/interfaces"
+	"golden-server/domain/entity"
 	"golden-server/interface/presenter"
 	"log"
 
@@ -9,10 +9,10 @@ import (
 )
 
 type userHandler struct {
-	service interfaces.UserService
+	service entity.UserService
 }
 
-func NewUserHandler(service interfaces.UserService, router fiber.Router) {
+func NewUserHandler(service entity.UserService, router fiber.Router) {
 	handler := &userHandler{service}
 
 	user := router.Group("/user")
@@ -28,11 +28,5 @@ func (h *userHandler) GetAll(c *fiber.Ctx) error {
 		return presenter.JsonResponse(c, fiber.StatusInternalServerError, nil)
 	}
 
-	data := make([]interface{}, len(users))
-
-	for i, user := range users {
-		data[i] = presenter.MapUser(user)
-	}
-
-	return presenter.JsonResponse(c, fiber.StatusOK, data)
+	return presenter.JsonResponse(c, fiber.StatusOK, users)
 }

@@ -1,2 +1,2 @@
 -- name: GetUsers :many
-SELECT * FROM users;
+SELECT dni, name FROM users;

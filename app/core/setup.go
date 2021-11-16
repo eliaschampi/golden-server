@@ -2,7 +2,6 @@ package core
 
 import (
 	"database/sql"
-	"golden-server/domain/entity"
 	"golden-server/infrastructure/repository"
 	"golden-server/interface/delivery/handler"
 	"golden-server/interface/presenter"
@@ -14,10 +13,8 @@ import (
 
 func StartApp(sqlInstance *sql.DB, app *fiber.App) {
 
-	queries := entity.New(sqlInstance)
-
-	rolRepo := repository.NewRolRepository(queries)
-	userRepo := repository.NewUserRepository(queries)
+	rolRepo := repository.NewRolRepository(sqlInstance)
+	userRepo := repository.NewUserRepository(sqlInstance)
 
 	rolService := usecase.NewRolService(&rolRepo)
 	userService := usecase.NewUserService(&userRepo)

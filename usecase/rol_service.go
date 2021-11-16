@@ -3,17 +3,16 @@ package usecase
 import (
 	"context"
 	"golden-server/domain/entity"
-	"golden-server/domain/interfaces"
 )
 
 type rolService struct {
-	rolRepo interfaces.RolRepository
+	rolRepo entity.RolRepository
 }
 
-func NewRolService(repo *interfaces.RolRepository) interfaces.RolService {
+func NewRolService(repo *entity.RolRepository) entity.RolService {
 	return &rolService{*repo}
 }
 
-func (s *rolService) GetAll(c context.Context) ([]entity.Role, error) {
+func (s *rolService) GetAll(c context.Context) ([]*entity.Role, error) {
 	return s.rolRepo.GetAll(c)
 }
