@@ -1,5 +1,5 @@
 # GOLANG FIBER API (CLEAN ARCHITECTURE)
-**_Best simple, lightweight, powerful and really fast Api with Golang (Fiber, Sqlc, Dbmate) PostgreSqLDatabase using Clean Architecture_**
+**_Best simple, lightweight, powerful and really fast Api with Golang (Fiber, Sqlc, Dbmate) PostgreSqL Database using Clean Architecture_**
 
 status: **WIP**
 
@@ -31,12 +31,17 @@ It is created with golang (fiber,Sqlc)
 **golderserver** requires [go 1.17+](https://golang.org/dl/) 
 ***postgres and dbmate*** installed to run.
 
-create .env file, copy .envexample content and set your postgres variables
+**Step 1** configure env file
+
+- create .env file
+- copy .envexample content
+- set your postgresql variables
+
 ```sh
 touch .env
 ```
 
-Creating database:
+**Step 2** create database
 
 to create database in postgres _check "infraestructure/database/base" folder_
 
@@ -44,7 +49,21 @@ to create database in postgres _check "infraestructure/database/base" folder_
 dbmate up
 ```
 
-Install the dependencies and start the server.
+**Step 3** Install sqlc cli
+
+
+```sh
+go install github.com/kyleconroy/sqlc/cmd/sqlc@latest
+```
+
+**Step 4** Sqlc generate model
+_check sqlc.yaml file_
+
+```sh
+sqlc generate
+```
+
+**Step 4** Install the dependencies and start the server.
 
 ```sh
 make download
