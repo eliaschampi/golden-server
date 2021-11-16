@@ -77,7 +77,7 @@ type Role struct {
 type Stock struct {
 	MaterialCode uuid.UUID
 	Quantity     int32
-	State        sql.NullString
+	State        string
 	UpdatedAt    time.Time
 }
 
@@ -86,11 +86,11 @@ type User struct {
 	Name      string
 	Lastname  string
 	RolCode   uuid.UUID
-	Gender    sql.NullString
+	Gender    string
 	Image     sql.NullString
 	Address   sql.NullString
 	Phone     sql.NullString
-	Email     sql.NullString
-	Password  sql.NullString
+	Email     string
+	Password  string
 	CreatedAt time.Time
 }

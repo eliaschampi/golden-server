@@ -148,7 +148,7 @@ CREATE TABLE public.roles (
 CREATE TABLE public.stocks (
     material_code uuid NOT NULL,
     quantity integer DEFAULT 0 NOT NULL,
-    state character(1),
+    state character(1) NOT NULL,
     updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP(6) NOT NULL
 );
 
@@ -162,12 +162,12 @@ CREATE TABLE public.users (
     name character varying(20) NOT NULL,
     lastname character varying(50) NOT NULL,
     rol_code uuid NOT NULL,
-    gender character(1),
+    gender character(1) NOT NULL,
     image character varying(100),
     address character varying(100),
     phone character varying(40),
-    email character varying(50),
-    password character varying(100),
+    email character varying(50) NOT NULL,
+    password character varying(100) NOT NULL,
     created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP(6) NOT NULL
 );
 

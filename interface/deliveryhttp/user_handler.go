@@ -28,5 +28,11 @@ func (h *userHandler) GetAll(c *fiber.Ctx) error {
 		return presenter.JsonResponse(c, fiber.StatusInternalServerError, nil)
 	}
 
-	return presenter.JsonResponse(c, fiber.StatusOK, users)
+	data := make([]interface{}, len(users))
+
+	for i, user := range users {
+		data[i] = presenter.MapUser(user)
+	}
+
+	return presenter.JsonResponse(c, fiber.StatusOK, data)
 }
