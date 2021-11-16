@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"golden-server/domain/entity"
 	"golden-server/infrastructure/repository"
-	"golden-server/interface/deliveryhttp"
+	"golden-server/interface/delivery/handler"
 	"golden-server/interface/presenter"
 	"golden-server/usecase"
 
@@ -31,8 +31,8 @@ func StartApp(sqlInstance *sql.DB, app *fiber.App) {
 	//send to delivery here
 	presenter.NewMessages()
 
-	deliveryhttp.NewRolHandler(rolService, router)
-	deliveryhttp.NewUserHandler(userService, router)
+	handler.NewRolHandler(rolService, router)
+	handler.NewUserHandler(userService, router)
 
 	app.Use(func(c *fiber.Ctx) error {
 		return c.Status(fiber.StatusNotFound).SendString("Elias, i can't find that!")

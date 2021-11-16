@@ -1,4 +1,4 @@
-package deliveryhttp
+package handler
 
 import (
 	"golden-server/domain/interfaces"
