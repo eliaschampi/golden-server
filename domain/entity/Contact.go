@@ -2,6 +2,7 @@ package entity
 
 import (
 	"context"
+	"golden-server/domain/rules"
 	"time"
 )
 
@@ -20,9 +21,11 @@ type Contact struct {
 //ContactRepository
 type ContactRepository interface {
 	GetAll(c context.Context) ([]*Contact, error)
+	Create(c context.Context, contact *rules.ContactStruct) (string, error)
 }
 
 //ContactRepository
 type ContactService interface {
 	GetAll(c context.Context) ([]*Contact, error)
+	Create(c context.Context, contact *rules.ContactStruct) (string, []*rules.ErrorResponse, error)
 }

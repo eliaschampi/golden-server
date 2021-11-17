@@ -16,3 +16,7 @@ func NewUserService(repo *entity.UserRepository) entity.UserService {
 func (s *userService) GetAll(c context.Context) ([]*entity.GetUsersRow, error) {
 	return s.userRepository.GetAll(c)
 }
+
+func (s *userService) Create(c context.Context) (code string, err error) {
+	return
+}
