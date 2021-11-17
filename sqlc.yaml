@@ -3,7 +3,7 @@ version: 1
 packages:
   - name: "entity"
     engine: "postgresql"
-    path: "./domain/entity/"
+    path: "./domain/sqlc/"
     queries: "./infrastructure/database/queries/"
     schema: "./infrastructure/database/migrations/"
     json_tags_case_style: "snake"

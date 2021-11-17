@@ -1,6 +1,7 @@
 .idea
 .vscode
 .env
+domain/sqlc
 go.sum
 rest.*
 notitas
