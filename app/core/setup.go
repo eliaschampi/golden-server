@@ -15,9 +15,11 @@ func StartApp(sqlInstance *sql.DB, app *fiber.App) {
 
 	rolRepo := repository.NewRolRepository(sqlInstance)
 	userRepo := repository.NewUserRepository(sqlInstance)
+	contactRepo := repository.NewContactRepository(sqlInstance)
 
 	rolService := usecase.NewRolService(&rolRepo)
 	userService := usecase.NewUserService(&userRepo)
+	contactService := usecase.NewContactService(&contactRepo)
 
 	app.Get("/", func(c *fiber.Ctx) error {
 		return c.SendString("te amo kath")
@@ -30,6 +32,7 @@ func StartApp(sqlInstance *sql.DB, app *fiber.App) {
 
 	handler.NewRolHandler(rolService, router)
 	handler.NewUserHandler(userService, router)
+	handler.NewContactHandler(contactService, router)
 
 	app.Use(func(c *fiber.Ctx) error {
 		return c.Status(fiber.StatusNotFound).SendString("Elias, i can't find that!")
